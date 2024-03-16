@@ -7,7 +7,7 @@ export default function Home() {
   const config = useAtomValue(configsAtom)
 
   return (
-    <div>
+    <div className="w-full h-full">
       {config.start ?
         <Pomodoro />
         : <Configs />}

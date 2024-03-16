@@ -4,15 +4,18 @@ import { PlayAndPause } from './PlayAndPause'
 import { SessionsIndicator } from './SessionsIndicator'
 import { useAtom } from 'jotai'
 import { configsAtom } from './Configs'
+import { useRef } from 'react'
 
 export const Pomodoro = (): JSX.Element => {
     const [configs, setConfigs] = useAtom(configsAtom)
-    const { play, stop, timer, status, sessions } = usePomodoro()
-
+    const { play, stop, timer, status } = usePomodoro()
+    
+    const audioRef = useRef<HTMLAudioElement>(null)
+    
     const isBreak = status.match('break')
 
     return (
-        <main className="select-none bg-pomo-deep-blue w-full h-screen flex flex-col justify-start items-center">
+        <main className="select-none bg-pomo-deep-blue w-full h-screen flex flex-col justify-start items-center pt-12 md:pt-16">
             <header className="flex justify-between items-center w-full p-10">
                 <h1 className="text-pomo-text-blue text-3xl font-bold">Pomodoro</h1>
                 <div className="flex justify-center items-center">
@@ -21,8 +24,8 @@ export const Pomodoro = (): JSX.Element => {
                     </button>
                 </div>
             </header>
-            <section className="flex">
-                <div className="mr-8 bg-pomo-soft-blue rounded-full w-52 h-52 flex justify-center items-center">
+            <section className="flex flex-col md:flex-row">
+                <div className="md:mr-8 bg-pomo-soft-blue rounded-full w-52 h-52 flex justify-center items-center">
                     <div
                         className={`${isBreak ? 'border-pomo-yellow' : 'border-pomo-green'} border-4 bg-pomo-soft-blue rounded-full w-44 h-44 flex justify-center items-center`}
                     >
@@ -31,11 +34,14 @@ export const Pomodoro = (): JSX.Element => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center mt-8 md:mt-0">
                     <h2 className={`${isBreak ? 'text-pomo-green-1' : 'text-pomo-green'} text-3xl font-bold`}>{isBreak ? 'Pausa' : 'Trabalho'}</h2>
                     <SessionsIndicator sessions={configs.sessions} status={status} />
                     <div className="flex justify-center items-center mt-8">
-                        <PlayAndPause status={status} handlePause={stop} handlePlay={play} />
+                        <audio ref={audioRef}>
+                            <source src='/audio.wav' />
+                        </audio>
+                        <PlayAndPause audio={audioRef.current} status={status} handlePause={stop} handlePlay={play} />
                     </div>
                 </div>
             </section>

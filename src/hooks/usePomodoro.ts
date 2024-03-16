@@ -19,6 +19,7 @@ export function usePomodoro(): UseTimerReturn {
     const [sessions, setSessions] = useState(configs.sessions)
 
     const intervelRef = useRef<NodeJS.Timeout | number>(0)
+    const title = document.querySelector("title")
 
     useEffect(() => {
         const minutes = Math.floor(seconds / 60)
@@ -39,6 +40,8 @@ export function usePomodoro(): UseTimerReturn {
         const secondsFormatted = secondsRemaining < 10 ? '0' + secondsRemaining : secondsRemaining
 
         setTimer(`${minutesFormatted}:${secondsFormatted}`)
+
+        title!.innerText = `${timer} - Foco!!!`
     }, [seconds]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const play = (): void => {
