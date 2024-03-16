@@ -8,11 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      colors: {
+        'pomo-deep-blue': ' #333853',
+        'pomo-soft-blue': '#3C4262',
+        'pomo-text-blue': '#A3A6B5',
+        'pomo-green': '#219653',
+        'pomo-yellow': '#F2C94C',
+        'pomo-arrow-blue': '#666C8B',
+        'pomo-number-blue': '#9FA1AE'
+      }
     },
   },
   plugins: [],

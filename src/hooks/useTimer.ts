@@ -3,12 +3,14 @@ import { useEffect, useRef, useState } from "react";
 type UseTimerReturn = {
     timer: string,
     play: () => void,
-    stop: () => void
+    stop: () => void,
+    status: Status
 }
 
 export function useTimer(configMinutes = 25): UseTimerReturn {
     const [timer, setTimer] = useState('25:00')
     const [seconds, setSeconds] = useState(configMinutes * 60)
+    const [status, setStatus] = useState<Status>('paused')
 
     const intervelRef = useRef<NodeJS.Timeout | number>(0)
 
@@ -23,11 +25,13 @@ export function useTimer(configMinutes = 25): UseTimerReturn {
         intervelRef.current = setInterval(() => {
             setSeconds(prev => prev - 1)
         }, 1000)
+        setStatus('progress')
     }
 
     const stop = (): void => {
         clearInterval(intervelRef.current)
+        setStatus('paused')
     }
 
-    return { timer, play, stop }
+    return { timer, play, stop, status }
 }
