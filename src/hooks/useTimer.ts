@@ -14,9 +14,9 @@ export function useTimer(configMinutes = 25): UseTimerReturn {
 
     useEffect(() => {
         const minutes = Math.floor(seconds / 60)
-        const secondsRemaining = seconds % 60 
+        const secondsRemaining = seconds % 60
 
-        setTimer(`${minutes}:${secondsRemaining<10?'0'+secondsRemaining : secondsRemaining}`)
+        setTimer(`${minutes}:${secondsRemaining < 10 ? '0' + secondsRemaining : secondsRemaining}`)
     }, [seconds])
 
     const play = (): void => {
@@ -29,5 +29,5 @@ export function useTimer(configMinutes = 25): UseTimerReturn {
         clearInterval(intervelRef.current)
     }
 
-    return { timer, play, stop}
+    return { timer, play, stop }
 }
