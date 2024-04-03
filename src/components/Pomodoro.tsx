@@ -4,15 +4,34 @@ import { PlayAndPause } from './PlayAndPause'
 import { SessionsIndicator } from './SessionsIndicator'
 import { useAtom } from 'jotai'
 import { configsAtom } from './Configs'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 export const Pomodoro = (): JSX.Element => {
     const [configs, setConfigs] = useAtom(configsAtom)
     const { play, stop, timer, status } = usePomodoro()
-    
-    const audioRef = useRef<HTMLAudioElement>(null)
-    
+
+    const audioPlayPauseRef = useRef<HTMLAudioElement>(null)
+    const audioBreakRef = useRef<HTMLAudioElement>(null)
+
     const isBreak = status.match('break')
+
+    useEffect(() => {
+        if (isBreak) {
+            switch (status) {
+                case 'break.paused':
+                    audioBreakRef.current?.play()
+                    break;
+
+                case 'break.progress':
+                    audioBreakRef.current?.pause()
+                    break;
+
+                default:
+                    audioBreakRef.current?.pause()
+                    break;
+            }
+        }
+    }, [isBreak, status])
 
     return (
         <main className="select-none bg-pomo-deep-blue w-full h-screen flex flex-col justify-start items-center pt-12 md:pt-16">
@@ -38,10 +57,13 @@ export const Pomodoro = (): JSX.Element => {
                     <h2 className={`${isBreak ? 'text-pomo-green-1' : 'text-pomo-green'} text-3xl font-bold`}>{isBreak ? 'Pausa' : 'Trabalho'}</h2>
                     <SessionsIndicator sessions={configs.sessions} status={status} />
                     <div className="flex justify-center items-center mt-8">
-                        <audio ref={audioRef}>
+                        <audio ref={audioPlayPauseRef}>
                             <source src='/audio.wav' />
                         </audio>
-                        <PlayAndPause audio={audioRef.current} status={status} handlePause={stop} handlePlay={play} />
+                        <audio ref={audioBreakRef}>
+                            <source src='/classic_alarm_clock_bell.wav' />
+                        </audio>
+                        <PlayAndPause audio={audioPlayPauseRef.current} status={status} handlePause={stop} handlePlay={play} />
                     </div>
                 </div>
             </section>
