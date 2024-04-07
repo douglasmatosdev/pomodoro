@@ -42,7 +42,21 @@ export function usePomodoro(): UseTimerReturn {
 
         setTimer(timerFormatted)
 
-        title!.innerText = `${timerFormatted} - Foco!!!`
+        if (status === 'work.paused') {
+            title!.innerText = `${timerFormatted} - Foco!!!`
+        }
+
+        if (status === 'work.progress') {
+            title!.innerText = `${timerFormatted} - Foco!!!`
+        }
+
+        if (status === 'break.paused') {
+            title!.innerText = `${timerFormatted} - Descanse!!!`
+        }
+
+        if (status === 'break.progress') {
+            title!.innerText = `${timerFormatted} - Descanse!!!`
+        }
     }, [seconds]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const play = (): void => {
@@ -84,6 +98,7 @@ export function usePomodoro(): UseTimerReturn {
         setSeconds(configs.workTime * 60)
         setStatus('work.paused')
         setSessions(prev => prev - 1)
+        title!.innerText = 'Pomodoro'
     }
 
     return { timer, play, stop, status, sessions }
