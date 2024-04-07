@@ -55,7 +55,7 @@ export const Pomodoro = (): JSX.Element => {
                 </div>
                 <div className="flex flex-col justify-center items-center mt-8 md:mt-0">
                     <h2 className={`${isBreak ? 'text-pomo-green-1' : 'text-pomo-green'} text-3xl font-bold`}>{isBreak ? 'Pausa' : 'Trabalho'}</h2>
-                    <SessionsIndicator sessions={configs.sessions} status={status} />
+                    <SessionsIndicator totalSessions={configs.sessions} currentSession={sessions} status={status} />
                     <div className="flex justify-center items-center mt-8">
                         <audio ref={audioPlayPauseRef}>
                             <source src='/audio.wav' />
