@@ -6,7 +6,8 @@ const initialState = {
     workTime: 25,
     breakTime: 5,
     sessions: 3,
-    start: false
+    start: false,
+    complete: false
 }
 
 export const configsAtom = atom<PomodoroState>(initialState)

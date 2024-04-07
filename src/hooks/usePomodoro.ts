@@ -33,7 +33,7 @@ export function usePomodoro(): UseTimerReturn {
             reset()
         }
         if (sessions <= 0) {
-            setConfigs({ ...configs, start: false })
+            setConfigs({ ...configs, start: false, complete: true })
         }
 
         const minutesFormatted = minutes < 10 ? '0' + minutes : minutes

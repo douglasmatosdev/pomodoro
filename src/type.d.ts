@@ -1,4 +1,4 @@
-declare type PomodoroState = { workTime: number; breakTime: number; sessions: number; start: boolean }
+declare type PomodoroState = { workTime: number; breakTime: number; sessions: number; start: boolean; complete: boolean }
 
 declare type PomodoroOptions = keyof PomodoroState
 
