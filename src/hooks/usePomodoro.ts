@@ -38,10 +38,11 @@ export function usePomodoro(): UseTimerReturn {
 
         const minutesFormatted = minutes < 10 ? '0' + minutes : minutes
         const secondsFormatted = secondsRemaining < 10 ? '0' + secondsRemaining : secondsRemaining
+        const timerFormatted = `${minutesFormatted}:${secondsFormatted}`
 
-        setTimer(`${minutesFormatted}:${secondsFormatted}`)
+        setTimer(timerFormatted)
 
-        title!.innerText = `${timer} - Foco!!!`
+        title!.innerText = `${timerFormatted} - Foco!!!`
     }, [seconds]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const play = (): void => {
