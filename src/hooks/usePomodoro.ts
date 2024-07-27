@@ -42,20 +42,22 @@ export function usePomodoro(): UseTimerReturn {
 
         setTimer(timerFormatted)
 
+        if (!title || !title?.innerText) return
+
         if (status === 'work.paused') {
-            title!.innerText = `${timerFormatted} - Foco!!!`
+            title.innerText = `${timerFormatted} - Foco!!!`
         }
 
         if (status === 'work.progress') {
-            title!.innerText = `${timerFormatted} - Foco!!!`
+            title.innerText = `${timerFormatted} - Foco!!!`
         }
 
         if (status === 'break.paused') {
-            title!.innerText = `${timerFormatted} - Descanse!!!`
+            title.innerText = `${timerFormatted} - Descanse!!!`
         }
 
         if (status === 'break.progress') {
-            title!.innerText = `${timerFormatted} - Descanse!!!`
+            title.innerText = `${timerFormatted} - Descanse!!!`
         }
     }, [seconds]) // eslint-disable-line react-hooks/exhaustive-deps
 
