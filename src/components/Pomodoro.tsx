@@ -13,7 +13,7 @@ export const Pomodoro = (): JSX.Element => {
     const audioPlayPauseRef = useRef<HTMLAudioElement>(null)
     const audioBreakStartAndBreakEndRef = useRef<HTMLAudioElement>(null)
 
-    const isBreak = status.match('break')
+    const isBreak = status.match('break') || status.match('paused')
 
     useEffect(() => {
         if (!isBreak && sessions < configs.sessions) {
@@ -33,12 +33,14 @@ export const Pomodoro = (): JSX.Element => {
         }
     }, [configs.sessions, isBreak, sessions, status])
 
+    const resetState = () => setConfigs({ ...configs, start: false, complete: false })
+
     return (
         <main className="select-none bg-pomo-deep-blue w-full h-screen flex flex-col justify-start items-center pt-12 md:pt-16">
             <header className="flex justify-between items-center w-full p-10">
-                <h1 className="text-pomo-text-blue text-3xl font-bold">Pomodoro</h1>
+                <h1 onClick={resetState} className="text-pomo-text-blue text-3xl font-bold">Pomodoro</h1>
                 <div className="flex justify-center items-center">
-                    <button onClick={() => setConfigs({ ...configs, start: false, complete: false })} className="select-none shadow-md text-center text-pomo-text-blue font-bold rounded-lg bg-pomo-soft-blue px-4 py-2">
+                    <button onClick={resetState} className="select-none shadow-md text-center text-pomo-text-blue font-bold rounded-lg bg-pomo-soft-blue px-4 py-2">
                         Início
                     </button>
                 </div>

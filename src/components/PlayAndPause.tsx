@@ -12,7 +12,8 @@ export const PlayAndPause = (props: PlayAndPauseProps) => {
     return status.match('paused') ? (
         <button
             onClick={() => {
-                audio!.play()
+                if (!audio || typeof audio!.play !== 'function') return
+                audio.play()
                 handlePlay()
             }}
             className="select-none shadow-md text-center text-4xl text-pomo-text-blue font-bold rounded-lg bg-pomo-soft-blue px-4 py-2"
@@ -22,7 +23,8 @@ export const PlayAndPause = (props: PlayAndPauseProps) => {
     ) : (
         <button
             onClick={() => {
-                audio!.play()
+                if (!audio || typeof audio!.play !== 'function') return
+                audio.play()
                 handlePause()
             }}
             className="select-none shadow-md text-center text-4xl text-pomo-text-blue font-bold rounded-lg bg-pomo-soft-blue px-4 py-2"

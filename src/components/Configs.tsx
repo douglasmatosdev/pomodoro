@@ -2,7 +2,7 @@
 import { atom, useAtom } from 'jotai'
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from 'react-icons/fa'
 
-const initialState = {
+const initialState: PomodoroState = {
     workTime: 25,
     breakTime: 5,
     sessions: 3,
@@ -17,11 +17,11 @@ export const Configs = (): JSX.Element => {
     const INCREMENT = 1
 
     const increment = (key: PomodoroOptions): void => {
-        setState(prev => ({ ...prev, [key]: +prev[key] + INCREMENT }))
+        setState((prev:  PomodoroState) => ({ ...prev, [key]: +prev[key] + INCREMENT }))
     }
 
     const decrement = (key: PomodoroOptions): void => {
-        setState(prev => ({ ...prev, [key]: +prev[key] - INCREMENT <= 1 ? 1 : +prev[key] - INCREMENT }))
+        setState((prev:  PomodoroState) => ({ ...prev, [key]: +prev[key] - INCREMENT <= 1 ? 1 : +prev[key] - INCREMENT }))
     }
 
     const start = (): void => {

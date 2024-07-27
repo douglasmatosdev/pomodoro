@@ -12,11 +12,11 @@ type UseTimerReturn = {
 }
 
 export function usePomodoro(): UseTimerReturn {
-    const [configs, setConfigs] = useAtom(configsAtom)
+    const [configs, setConfigs] = useAtom<PomodoroState>(configsAtom)
     const [timer, setTimer] = useState('00:00')
     const [seconds, setSeconds] = useState(configs.workTime * 60)
     const [status, setStatus] = useState<Status>('work.paused')
-    const [sessions, setSessions] = useState(configs.sessions)
+    const [sessions, setSessions] = useState<PomodoroState['sessions']>(configs.sessions)
 
     const intervelRef = useRef<NodeJS.Timeout | number>(0)
     const title = document.querySelector("title")
@@ -79,6 +79,7 @@ export function usePomodoro(): UseTimerReturn {
             default:
                 break;
         }
+
         intervelRef.current = setInterval(() => {
             setSeconds(prev => prev - 1)
         }, 10)
