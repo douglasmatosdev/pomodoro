@@ -4,14 +4,14 @@ import { act, renderHook } from "@testing-library/react";
 jest.useFakeTimers()
 
 describe('Test suite for timer function', () => {
-    it('should return initial value 25:00', () => {
+    test('should return initial value 25:00', () => {
 
         const { result } = renderHook(() => usePomodoro())
 
         expect(result.current.timer).toEqual('25:00')
     });
 
-    it('should be return a countdown', () => {
+    test('should be return a countdown', () => {
         const { result } = renderHook(() => usePomodoro())
 
         act(() => {
@@ -30,7 +30,7 @@ describe('Test suite for timer function', () => {
         expect(result.current.timer).toEqual('24:58')
     });
 
-    it('must stop the countdown', () => {
+    test('must stop the countdown', () => {
         const { result } = renderHook(() => usePomodoro())
 
         act(() => {
@@ -59,7 +59,7 @@ describe('Test suite for timer function', () => {
 
     });
     
-    it('The countdown must continue', () => {
+    test('The countdown must continue', () => {
         const { result } = renderHook(() => usePomodoro())
 
         act(() => {

@@ -81,7 +81,7 @@ export function usePomodoro(): UseTimerReturn {
         }
         intervelRef.current = setInterval(() => {
             setSeconds(prev => prev - 1)
-        }, 10)
+        }, 1000)
     }
 
     const stop = (): void => {
